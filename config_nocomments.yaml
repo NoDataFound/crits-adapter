@@ -1,0 +1,69 @@
+crits:
+  sites:
+    localhost:                                             
+      host: 127.0.0.1
+      enabled: true
+      api:
+        user: api
+        key: changeme
+        port: 443
+        poll_interval: 30
+        max_results: 1000
+        path: /api/v1/
+        source: default                                    
+        releasability: soltra
+        use_releasability: false
+        ssl: true
+        attempt_certificate_validation: false
+
+  datagen:
+      indicator_count: 100
+edge:
+  sites:
+    localhost:
+      host: 127.0.0.1
+      enabled: true
+      stix:
+        xmlns_name: yourcompanyname
+        xmlns_url: http://www.your_company.com/
+      taxii:
+
+        user: admin
+        pass: avalanche
+        port: 443
+        poll_interval: 30
+        path: /taxii-data
+        collection: system.Default
+        version: 1.1
+        ssl: true
+        attempt_certificate_validation: false
+
+  datagen:
+      indicator_count: 100
+
+daemon:
+
+  app_path: /opt/soltra/edge/repository/adapters/crits
+  debug: false
+
+  log:
+    file: edgy_crits.log
+    rotate_count: 10
+    rotate_size: 1024000
+  pid: edgy_crits.pid
+
+  working_dir: /opt/soltra/edge/repository/adapters/crits
+
+  mongo:
+    host: localhost
+    port: 27017
+    user:
+    pass:
+    db: inbox
+    collection: adapters.crits
+
+datagen:
+  canonical_tlds: datagen_samples/crits-tlds.txt
+
+  email_header_samples: datagen_samples/mail_headers.yaml
+  
